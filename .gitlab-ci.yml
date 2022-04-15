@@ -1,19 +1,28 @@
 image: python:latest
 
-before_script:
-  - python --version
-  - pip install -r requirements.txt
-
 stages:
   - Static Analysis
   - Test
+  - Build
 
 pylint:
   stage: Static Analysis
   script:
-  - pylint -d C0301 C0116 C0114 src/*.py
+    - pip install pylint
+    - pylint -d C0301,C0116,C0114 src/*.py
 
 pytest:
   stage: Test
   script:
-  - cd test/;pytest -v
+    - pip install pytest
+    - cd test/;pytest -v
+
+build:
+  image: "tobix/pywine:latest"
+  stage: Build
+  script:
+    - cd src/
+    - wine pyinstaller -F main.py
+  artifacts:
+    paths:
+      - src/dist/*.exe
