@@ -22,7 +22,7 @@ build:
   stage: Build
   script:
     - cd src/
-    - wine pyinstaller -F main.py
+    - wine pyinstaller -F -n Clinicare main.py
   artifacts:
     paths:
       - src/dist/*.exe
