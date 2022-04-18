@@ -21,10 +21,7 @@ BPAD_RIGHT = ((10,20), (10, 20))
 
 top_banner = [[sg.Text('Clinicare', font='Any 20', background_color=DARK_HEADER_COLOR)]]
 
-top  = [[sg.Text('Klinik Terdekat', font='Any 20', pad=((10,0), (0, 0))),
-         sg.Input('Provinsi', pad=((20, 0),(0, 0)), size=(20,1)),
-         sg.Input('Kota', pad=((20, 0),(0, 0)), size=(20,1)),
-         sg.Button('Cari', pad=((20, 0),(0, 0)), size=(10,1))]]
+top  = [[sg.Text('Klinik Terdekat', font='Any 20', pad=((10,0), (0, 0)))]]
 
 block_3 = [[sg.Text('Nama Klinik', font='Any 20')],
             [sg.Text('Alamat Klinik'), sg.Text('Jam Buka & Tutup')],
@@ -48,12 +45,3 @@ LAYOUT_KLINIK = [[sg.Column(top_banner, size=(960, 40), pad=(0,0), background_co
                       [sg.Column(block_3, size=(450,100),  pad=BPAD_LEFT_INSIDE)]], pad=BPAD_LEFT, background_color=BORDER_COLOR),
            sg.Column([[sg.Column(block_4, size=(450,100), pad=BPAD_LEFT_INSIDE)],
                       [sg.Column(block_5, size=(450,100), pad=BPAD_LEFT_INSIDE)]], pad=BPAD_LEFT, background_color=BORDER_COLOR)]]
-
-# window = sg.Window('Klinik Terdekat', layout, background_color=BORDER_COLOR)
-
-# while True:
-#     event, values = window.read()
-#     print(event, values)
-#     if event in (sg.WIN_CLOSED, 'Exit'):
-#         break
-# window.close()
