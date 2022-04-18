@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
-from login import LAYOUT_LOGIN
-from register import LAYOUT_REGISTER
+from login import LAYOUT_LOGIN, LAYOUT_LOGIN_PASIEN, LAYOUT_LOGIN_DOKTER, auth_login
+from register import LAYOUT_REGISTER, LAYOUT_AFTER_REGISTER, auth_register
 from klinik_terdekat import LAYOUT_KLINIK
 
 sg.theme('LightGreen3')
@@ -35,7 +35,10 @@ LAYOUT = [
     [
         sg.Column(LAYOUT_MAIN_BEFORE_LOGIN, key='LAYOUT_MAIN_BEFORE_LOGIN', element_justification='c'),
         sg.Column(LAYOUT_LOGIN, visible=False, key='LAYOUT_LOGIN', element_justification='c'),
+        sg.Column(LAYOUT_LOGIN_PASIEN, visible=False, key='LAYOUT_LOGIN_PASIEN', element_justification='c'),
+        sg.Column(LAYOUT_LOGIN_DOKTER, visible=False, key='LAYOUT_LOGIN_DOKTER', element_justification='c'),
         sg.Column(LAYOUT_REGISTER, visible=False, key='LAYOUT_REGISTER', element_justification='c'),
+        sg.Column(LAYOUT_AFTER_REGISTER, visible=False, key='LAYOUT_AFTER_REGISTER', element_justification='c'),
         sg.Column(LAYOUT_MAIN_AFTER_LOGIN_DOKTER, visible=False, key='LAYOUT_MAIN_AFTER_LOGIN_DOKTER', element_justification='c'),
         sg.Column(LAYOUT_MAIN_AFTER_LOGIN_PASIEN, visible=False, key='LAYOUT_MAIN_AFTER_LOGIN_PASIEN', element_justification='c'),
         sg.Column(LAYOUT_KLINIK, visible=False, key='LAYOUT_KLINIK')
@@ -46,20 +49,62 @@ window = sg.Window('Clinicare', LAYOUT)
 
 LAYOUT = 'MAIN_BEFORE_LOGIN'
 
+role = ""
 while True:
     event, values = window.read()
-    print(event, values)
-
+    print(event, values, role)
     if event in ('LOGIN', 'REGISTER', 'KLINIK'):
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = event
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
 
-    elif 'MAIN_AFTER_LOGIN_' in event:
+    elif event in ('LOGIN_PASIEN'):
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = event
+        role = 'Pasien'
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
 
+    elif event in ('LOGIN_DOKTER'):
+        window[f'LAYOUT_{LAYOUT}'].update(visible=False)
+        LAYOUT = event
+        role = 'Dokter'
+        window[f'LAYOUT_{LAYOUT}'].update(visible=True)
+        
+    elif 'MAIN_AFTER_LOGIN' in event:
+        window[f'LAYOUT_{LAYOUT}'].update(visible=False)
+        if role=='Pasien':
+            uname = str(values['USERNAME_P'])
+            pw = str(values['PASSWORD_P'])
+        else :
+            uname = str(values['USERNAME_D'])
+            pw = str(values['PASSWORD_D'])            
+        if not uname:
+            sg.Popup('Username tidak boleh kosong')
+        elif not pw:
+            sg.Popup('Password tidak boleh kosong')
+        elif auth_login(uname, pw, role)==1:
+            sg.Popup('Username atau Password salah')
+        elif auth_login(uname, pw, role)==0:
+            sg.Popup('Jenis akun salah')
+        else:
+            LAYOUT = event
+        window[f'LAYOUT_{LAYOUT}'].update(visible=True)
+
+    elif 'AFTER_REGISTER' in event:
+        window[f'LAYOUT_{LAYOUT}'].update(visible=False)
+        uname = str(values['USERNAME_REG'])
+        pw = str(values['PASSWORD_REG'])
+        role = str(values['ROLE'])
+        if not uname:
+            sg.Popup('Username tidak boleh kosong')
+        elif not pw:
+            sg.Popup('Password tidak boleh kosong')
+        elif auth_register(uname, pw, role)==0:
+            sg.Popup('Username sudah dipakai')
+        else:
+            LAYOUT = event
+        window[f'LAYOUT_{LAYOUT}'].update(visible=True)
+        
     elif 'MAIN_BEFORE_LOGIN' in event:
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = 'MAIN_BEFORE_LOGIN'
