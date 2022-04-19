@@ -1,0 +1,3 @@
+ojaan2,083851005207,jumat,rsia
+ojaan3,083851005208,jumat,rsiu
+ojaan4,083851005209,jumat,rsie
