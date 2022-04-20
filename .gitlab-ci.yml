@@ -10,12 +10,16 @@ pylint:
   script:
     - pip install -r requirements.txt
     - pylint -d C0301,C0116,C0114 src/*.py
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"
 
 pytest:
   stage: Test
   script:
     - pip install -r requirements.txt
     - cd test/;pytest -v
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"
 
 build:
   image: "tobix/pywine:latest"
@@ -23,6 +27,8 @@ build:
   script:
     - cd src/
     - wine pyinstaller -F -n Clinicare main.py
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"
   artifacts:
     paths:
       - src/dist/*.exe
