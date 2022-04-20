@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 from login import LAYOUT_LOGIN, LAYOUT_LOGIN_PASIEN, LAYOUT_LOGIN_DOKTER, auth_login
-from register import LAYOUT_REGISTER, LAYOUT_AFTER_REGISTER, auth_register
+from register import LAYOUT_REGISTER, LAYOUT_AFTER_REGISTER_P, LAYOUT_AFTER_REGISTER_D, auth_register
 from klinik_terdekat import LAYOUT_KLINIK
 
 sg.theme('LightGreen3')
@@ -38,7 +38,8 @@ LAYOUT = [
         sg.Column(LAYOUT_LOGIN_PASIEN, visible=False, key='LAYOUT_LOGIN_PASIEN', element_justification='c'),
         sg.Column(LAYOUT_LOGIN_DOKTER, visible=False, key='LAYOUT_LOGIN_DOKTER', element_justification='c'),
         sg.Column(LAYOUT_REGISTER, visible=False, key='LAYOUT_REGISTER', element_justification='c'),
-        sg.Column(LAYOUT_AFTER_REGISTER, visible=False, key='LAYOUT_AFTER_REGISTER', element_justification='c'),
+        sg.Column(LAYOUT_AFTER_REGISTER_P, visible=False, key='LAYOUT_AFTER_REGISTER_P', element_justification='c'),
+        sg.Column(LAYOUT_AFTER_REGISTER_D, visible=False, key='LAYOUT_AFTER_REGISTER_D', element_justification='c'),
         sg.Column(LAYOUT_MAIN_AFTER_LOGIN_DOKTER, visible=False, key='LAYOUT_MAIN_AFTER_LOGIN_DOKTER', element_justification='c'),
         sg.Column(LAYOUT_MAIN_AFTER_LOGIN_PASIEN, visible=False, key='LAYOUT_MAIN_AFTER_LOGIN_PASIEN', element_justification='c'),
         sg.Column(LAYOUT_KLINIK, visible=False, key='LAYOUT_KLINIK')
@@ -90,16 +91,29 @@ while True:
             LAYOUT = event
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
 
-    elif 'AFTER_REGISTER' in event:
+    elif 'AFTER_REGISTER_P' in event:
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
-        uname = str(values['USERNAME_REG'])
-        pw = str(values['PASSWORD_REG'])
-        role = str(values['ROLE'])
+        uname = str(values['USERNAME_REG_P'])
+        pw = str(values['PASSWORD_REG_P'])
         if not uname:
             sg.Popup('Username tidak boleh kosong')
         elif not pw:
             sg.Popup('Password tidak boleh kosong')
-        elif auth_register(uname, pw, role)==0:
+        elif auth_register(uname, pw, 'Pasien')==0:
+            sg.Popup('Username sudah dipakai')
+        else:
+            LAYOUT = event
+        window[f'LAYOUT_{LAYOUT}'].update(visible=True)
+        
+    elif 'AFTER_REGISTER_D' in event:
+        window[f'LAYOUT_{LAYOUT}'].update(visible=False)
+        uname = str(values['USERNAME_REG_D'])
+        pw = str(values['PASSWORD_REG_D'])
+        if not uname:
+            sg.Popup('Username tidak boleh kosong')
+        elif not pw:
+            sg.Popup('Password tidak boleh kosong')
+        elif auth_register(uname, pw, 'Dokter')==0:
             sg.Popup('Username sudah dipakai')
         else:
             LAYOUT = event
