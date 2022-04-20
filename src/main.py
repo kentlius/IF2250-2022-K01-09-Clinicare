@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 from login import LAYOUT_LOGIN
 from register import LAYOUT_REGISTER
 from klinik_terdekat import LAYOUT_KLINIK
-from doktercekjadwal import LAYOUT_CEK_JADWAL, get_request, delete_request
+from doktercekjadwal import LAYOUT_CEK_JADWAL, get_request
 from klinik_terdekat import LAYOUT_KLINIK, klinik
 
 # sg.theme('LightGreen3')
@@ -28,7 +28,7 @@ LAYOUT_MAIN_AFTER_LOGIN_PASIEN = [
 
 LAYOUT_MAIN_AFTER_LOGIN_DOKTER = [
     [sg.Text('Main Menu Dokter', font=TITLE_SIZE, size=F_SIZE, justification="center")],
-    [sg.Button('Cek Request', key='CEK_JADWAL', size=BTN_SIZE)],
+    [sg.Button('Cek Jadwal', key='CEK_JADWAL', size=BTN_SIZE)],
     [sg.Text('')],
     [sg.Button('Logout', key='LAYOUT_MAIN_BEFORE_LOGIN'), sg.Button('Exit')]
 ]
@@ -48,8 +48,7 @@ LAYOUT = [
 window = sg.Window('Clinicare', LAYOUT)
 
 LAYOUT = 'MAIN_BEFORE_LOGIN'
-init = get_request()
-n_request = len(get_request())
+
 while True:
     event, values = window.read()
     print(event, values)
@@ -79,17 +78,7 @@ while True:
         LAYOUT = 'CEK_JADWAL'         
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
         for i in range(len(get_request())):
-            window['REQUEST'+str(i)].update(visible=True)
-    
-    elif event in ["MAIN_CONFIRM"+str(i) for i in range(n_request)]:
-        window['REQUEST'+event[-1]].update(visible=False)
-        delete_request(init[int(event[-1])])
-        sg.popup_auto_close("Request diterima!")
-
-    elif event in ["MAIN_REJECT"+str(i) for i in range(n_request)]:
-        window['REQUEST'+event[-1]].update(visible=False)
-        delete_request(init[int(event[-1])])
-        sg.popup_auto_close("Request ditolak!")
+            window['JADWAL'+str(i)].update(visible=True)
 
     if event == 'Cari':
         for i in range(len(klinik)):
