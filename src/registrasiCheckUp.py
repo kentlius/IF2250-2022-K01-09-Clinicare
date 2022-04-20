@@ -27,8 +27,8 @@ top =	[[sg.Text("<< NAMA KLINIK >>", font="Any 20")],
     	 [sg.Text("<< 00:00 s/d 23.59 >>")],
     	 [sg.Text("<< ALAMAT KLINIK >>")]]
 
-form = 	[[sg.Text('Dokter yang diinginkan', size=(30,1)), sg.Text(':', size=(1,1)), sg.Combo(['Dokter A', 'Dokter B', 'Dokter C'], key='Favorite Colour', size=(20,1))],
-		 [sg.Text('Tanggal Check Up', size=(30,1)), sg.Text(':', size=(1,1)), sg.Input('...-...-...', size=(10,1), key ="date"), sg.CalendarButton('Pilih tanggal', target=(1,2),format='%Y-%m-%d')],
+form = 	[[sg.Text('Dokter yang diinginkan', size=(30,1)), sg.Text(':', size=(1,1)), sg.Combo(['Dokter A', 'Dokter B', 'Dokter C'], key='DOKTER', size=(20,1))],
+		 [sg.Text('Tanggal Check Up', size=(30,1)), sg.Text(':', size=(1,1)), sg.Input('...-...-...', size=(10,1), key ="TANGGAL"), sg.CalendarButton('Pilih tanggal', target=(1,2),format='%Y-%m-%d')],
 		 [sg.Text('Jam Check Up', size=(30,1)), sg.Text(':', size=(1,1)), sg.Spin([i for i in range(0,24)], initial_value=0, key='Hour'), sg.Spin([i for i in range(0,60)], initial_value=0, key='Minute')],
 		 [sg.Text('Kontak yang bisa dihubungi', size=(30,1)), sg.Text(':', size=(1,1)),  sg.InputText(key='Kontak')],]
 
@@ -36,7 +36,7 @@ form = 	[[sg.Text('Dokter yang diinginkan', size=(30,1)), sg.Text(':', size=(1,1
 LAYOUT_PENDAFTARAN = 	[[sg.Column(top_banner, size=(960, 40), pad=(0,0), background_color=DARK_HEADER_COLOR)],
     					 [sg.Column(top, size=(920, 100))],
 						 [sg.Column(form, size=(920, 120))],
-						 [sg.Button('Back'), sg.Button('Konfirmasi')]
+						 [sg.Button('Back', key="MAIN_AFTER_LOGIN_PASIEN"), sg.Button('Konfirmasi', key='DAFTAR')]
 ]
 
 window = sg.Window('CLINICARE - Pendaftaran Check-Up', LAYOUT_PENDAFTARAN, background_color=BORDER_COLOR)
@@ -45,5 +45,18 @@ while True:
 	print(event, values)
 	if event == sg.WIN_CLOSED:
 		break
+	elif 'DAFTAR' in event:
+		namaKlinik = "namaKlinik"
+		namaDokter = str(values['DOKTER'])
+		namaPasien = "namaPasien"
+		tanggal = str(values['TANGGAL'])
+		jamMulai = str(values['Hour']) + ':' + str(values['Minute'])
+		kontak = str(values['Kontak'])
+		print(f"{namaKlinik},{namaDokter},{namaPasien},{tanggal},{jamMulai},{kontak}")
+		fileJadwal = open("data/jadwal.txt", "a")
+		fileJadwal.write(f"\n{namaKlinik},{namaDokter},{namaPasien},{tanggal},{jamMulai},{kontak}")
+		fileJadwal.close()
+		
+
 
 window.close()
