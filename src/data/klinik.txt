@@ -1,5 +1,5 @@
-Klinik Cisitu;Jl. Cisitu Indah;Bandung;Jawa Barat;08.00;19.00
-Klinik Gresik;Jl. Gatau;Gresik;Jawa Timur;09.00;17.00
-Klinik BSD;Jl. Rawa Buntu;Tangerang Selatan;Banten;06.00;14.00
-Klinik Palembang;Jl. Sukarjo;Palembang;Sumatera Selatan;07.00;20.00
-Klinik Ada;Jl. Asal;Ini Kota;Ini Provinsi;08.00;20.00
+Klinik Cisitu,Jl. Cisitu Indah,Bandung,Jawa Barat,08.00,19.00
+Klinik Gresik,Jl. Gatau,Gresik,Jawa Timur,09.00,17.00
+Klinik BSD,Jl. Rawa Buntu,Tangerang Selatan,Banten,06.00,14.00
+Klinik Palembang,Jl. Sukarjo,Palembang,Sumatera Selatan,07.00,20.00
+Klinik Ada,Jl. Asal,Ini Kota,Ini Provinsi,08.00,20.00
