@@ -21,6 +21,6 @@ LAYOUT_CEK_JADWAL = [
 
 for i in range(len(get_request())):
     LAYOUT_CEK_JADWAL.append([sg.Column([
-                [sg.Text(get_request()[i]['username'], font='Any 20')],
+                [sg.Text(get_request()[i]['pasien'], font='Any 20')],
                 [sg.Text(get_request()[i]['kontak']), sg.Text(get_request()[i]['waktu']), sg.Text(get_request()[i]['klinik'])]],
                 key='JADWAL'+str(i), visible=False, size=(450, 100), pad=BPAD_LEFT)])
