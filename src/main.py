@@ -162,7 +162,7 @@ while True:
         jamMulai = str(values['Hour']) + ':' + str(values['Minute'])
         kontak = str(values['Kontak'])
         namaKlinik = getKlinik(namaDokter)
-        fileJadwal = open("src/data/jadwal.txt", "a")
+        fileJadwal = open("../src/data/jadwal.txt", "a")
         fileJadwal.write(f"\n{namaKlinik},{namaDokter},{namaPasien},{tanggal},{jamMulai},{kontak}")
         fileJadwal.close()
         sg.Popup('Pendaftaran Berhasil dilakukan')

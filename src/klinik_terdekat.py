@@ -4,7 +4,7 @@ from style import DARK_HEADER_COLOR, BPAD_TOP, BPAD_LEFT
 
 sg.theme('LightGreen3')
 
-BANNER = [[sg.Text('Clinicare', font='Any 20', background_color=DARK_HEADER_COLOR)]]
+BANNER = [[sg.Text('Clinicare', font='Any 20', background_color=DARK_HEADER_COLOR, text_color='white')]]
 
 SEARCH_BAR  = [
     [
