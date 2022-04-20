@@ -1,7 +1,8 @@
 import PySimpleGUI as sg
+
 from login import LAYOUT_LOGIN, LAYOUT_LOGIN_PASIEN, LAYOUT_LOGIN_DOKTER, auth_login
-from register import LAYOUT_REGISTER, LAYOUT_AFTER_REGISTER_P, LAYOUT_AFTER_REGISTER_D, auth_register
-from klinik_terdekat import LAYOUT_KLINIK
+from register import LAYOUT_REGISTER, LAYOUT_AFTER_REGISTER_P, LAYOUT_AFTER_REGISTER_D, auth_register, doc_register, pas_register
+from klinik_terdekat import LAYOUT_KLINIK, data_klinik
 
 sg.theme('LightGreen3')
 
@@ -50,10 +51,10 @@ window = sg.Window('Clinicare', LAYOUT)
 
 LAYOUT = 'MAIN_BEFORE_LOGIN'
 
-role = ""
+ROLE = ""
 while True:
     event, values = window.read()
-    print(event, values, role)
+    print(event, values, ROLE)
     if event in ('LOGIN', 'REGISTER', 'KLINIK'):
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = event
@@ -62,30 +63,30 @@ while True:
     elif event in ('LOGIN_PASIEN'):
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = event
-        role = 'Pasien'
+        ROLE = 'Pasien'
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
 
     elif event in ('LOGIN_DOKTER'):
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = event
-        role = 'Dokter'
+        ROLE = 'Dokter'
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
-        
+ 
     elif 'MAIN_AFTER_LOGIN' in event:
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
-        if role=='Pasien':
-            uname = str(values['USERNAME_P'])
-            pw = str(values['PASSWORD_P'])
+        if ROLE=='Pasien':
+            UNAME = str(values['USERNAME_P'])
+            PW = str(values['PASSWORD_P'])
         else :
-            uname = str(values['USERNAME_D'])
-            pw = str(values['PASSWORD_D'])            
-        if not uname:
+            UNAME = str(values['USERNAME_D'])
+            PW = str(values['PASSWORD_D'])
+        if not UNAME:
             sg.Popup('Username tidak boleh kosong')
-        elif not pw:
+        elif not PW:
             sg.Popup('Password tidak boleh kosong')
-        elif auth_login(uname, pw, role)==1:
+        elif auth_login(UNAME, PW, ROLE)==1:
             sg.Popup('Username atau Password salah')
-        elif auth_login(uname, pw, role)==0:
+        elif auth_login(UNAME, PW, ROLE)==0:
             sg.Popup('Jenis akun salah')
         else:
             LAYOUT = event
@@ -93,36 +94,45 @@ while True:
 
     elif 'AFTER_REGISTER_P' in event:
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
-        uname = str(values['USERNAME_REG_P'])
-        pw = str(values['PASSWORD_REG_P'])
-        if not uname:
+        UNAME = str(values['USERNAME_REG_P'])
+        PW = str(values['PASSWORD_REG_P'])
+        if not UNAME:
             sg.Popup('Username tidak boleh kosong')
-        elif not pw:
+        elif not PW:
             sg.Popup('Password tidak boleh kosong')
-        elif auth_register(uname, pw, 'Pasien')==0:
+        elif auth_register(UNAME, PW, 'Pasien')==0:
             sg.Popup('Username sudah dipakai')
         else:
+            pas_register(str(values["NAME_REG_P"]),str(values["ALAMAT_REG_P"]))
             LAYOUT = event
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
-        
+
     elif 'AFTER_REGISTER_D' in event:
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
-        uname = str(values['USERNAME_REG_D'])
-        pw = str(values['PASSWORD_REG_D'])
-        if not uname:
+        UNAME = str(values['USERNAME_REG_D'])
+        PW = str(values['PASSWORD_REG_D'])
+        if not UNAME:
             sg.Popup('Username tidak boleh kosong')
-        elif not pw:
+        elif not PW:
             sg.Popup('Password tidak boleh kosong')
-        elif auth_register(uname, pw, 'Dokter')==0:
+        elif auth_register(UNAME, PW, 'Dokter')==0:
             sg.Popup('Username sudah dipakai')
         else:
+            doc_register(str(values['NAME_REG_D']), str(values['KLINIK_REG_D']), str(values['ALAMAT_REG_D']), str(values['PROVINSI_REG_D']), str(values['KOTA_REG_D']), str(values['JAM_BUKA']), str(values['JAM_TUTUP']))
             LAYOUT = event
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
-        
+
     elif 'MAIN_BEFORE_LOGIN' in event:
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = 'MAIN_BEFORE_LOGIN'
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
+
+    if event == 'Cari':
+        for i in range(len(data_klinik)):
+            if values[0].lower() == data_klinik[i]['provinsi'].lower() and values[1].lower() == data_klinik[i]['kota'].lower():
+                window[str(i)].update(visible=True)
+            else:
+                window[str(i)].update(visible=False)
 
     if event == sg.WIN_CLOSED or 'Exit' in event:
         break
