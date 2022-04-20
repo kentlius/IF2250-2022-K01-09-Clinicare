@@ -1,7 +1,2 @@
-<<<<<<< HEAD
-Klinik Cisitu,Fransiskus Davin,ucup,2022-1-1,15.00,0812345678
-Klinik Gresik,Farnas Rozaan,otong,2022-1-1,15.00,0812345677
-=======
 Klinik Cisitu,Fransiskus Davin,ucup,2022-1-1,15.00
 Klinik Gresik,Farnas Rozaan,otong,2022-1-1,15.00
->>>>>>> ef61ece166fccab20f79990fddf944c8049a69bc
