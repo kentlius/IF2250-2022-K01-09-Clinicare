@@ -39,7 +39,7 @@ LAYOUT_PENDAFTARAN = 	[[sg.Column(top_banner, size=(960, 40), pad=(0,0), backgro
 						 [sg.Button('Back', key="MAIN_AFTER_LOGIN_PASIEN"), sg.Button('Konfirmasi', key='DAFTAR')]
 ]
 
-window = sg.Window('CLINICARE - Pendaftaran Check-Up', LAYOUT_PENDAFTARAN, background_color=BORDER_COLOR)
+'''window = sg.Window('CLINICARE - Pendaftaran Check-Up', LAYOUT_PENDAFTARAN, background_color=BORDER_COLOR)
 while True:
 	event, values = window.read()
 	print(event, values)
@@ -59,4 +59,4 @@ while True:
 		
 
 
-window.close()
+window.close()'''
