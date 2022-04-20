@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 
 from login import LAYOUT_LOGIN, LAYOUT_LOGIN_PASIEN, LAYOUT_LOGIN_DOKTER, auth_login
-from register import LAYOUT_REGISTER, LAYOUT_AFTER_REGISTER_P, LAYOUT_AFTER_REGISTER_D, auth_register, doc_register, pas_register
+from register import LAYOUT_REGISTER, LAYOUT_AFTER_REGISTER_P, LAYOUT_AFTER_REGISTER_D, auth_register, doc_register, klinik_register, pas_register
 from klinik_terdekat import LAYOUT_KLINIK, data_klinik
 
 sg.theme('LightGreen3')
@@ -60,13 +60,13 @@ while True:
         LAYOUT = event
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
 
-    elif event in ('LOGIN_PASIEN'):
+    elif event == 'LOGIN_PASIEN':
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = event
         ROLE = 'Pasien'
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
 
-    elif event in ('LOGIN_DOKTER'):
+    elif event == 'LOGIN_DOKTER':
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = event
         ROLE = 'Dokter'
@@ -86,8 +86,6 @@ while True:
             sg.Popup('Password tidak boleh kosong')
         elif auth_login(UNAME, PW, ROLE)==1:
             sg.Popup('Username atau Password salah')
-        elif auth_login(UNAME, PW, ROLE)==0:
-            sg.Popup('Jenis akun salah')
         else:
             LAYOUT = event
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
@@ -96,14 +94,12 @@ while True:
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         UNAME = str(values['USERNAME_REG_P'])
         PW = str(values['PASSWORD_REG_P'])
-        if not UNAME:
-            sg.Popup('Username tidak boleh kosong')
-        elif not PW:
-            sg.Popup('Password tidak boleh kosong')
-        elif auth_register(UNAME, PW, 'Pasien')==0:
+        if (not UNAME or not PW):
+            sg.Popup('Username atau password tidak boleh kosong')
+        elif auth_register(UNAME,'Pasien'):
             sg.Popup('Username sudah dipakai')
         else:
-            pas_register(str(values["NAME_REG_P"]),str(values["ALAMAT_REG_P"]))
+            pas_register(UNAME, str(values['NAMA_REG_P']), PW, str(values['ALAMAT_REG_P']))
             LAYOUT = event
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
 
@@ -111,14 +107,13 @@ while True:
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         UNAME = str(values['USERNAME_REG_D'])
         PW = str(values['PASSWORD_REG_D'])
-        if not UNAME:
-            sg.Popup('Username tidak boleh kosong')
-        elif not PW:
-            sg.Popup('Password tidak boleh kosong')
-        elif auth_register(UNAME, PW, 'Dokter')==0:
+        if not UNAME or not PW:
+            sg.Popup('Username atau password tidak boleh kosong')
+        elif auth_register(UNAME,'Doktor'):
             sg.Popup('Username sudah dipakai')
         else:
-            doc_register(str(values['NAME_REG_D']), str(values['KLINIK_REG_D']), str(values['ALAMAT_REG_D']), str(values['PROVINSI_REG_D']), str(values['KOTA_REG_D']), str(values['JAM_BUKA']), str(values['JAM_TUTUP']))
+            doc_register(UNAME,str(values['NAME_REG_D']), PW, str(values['KLINIK_REG_D']))
+            klinik_register(str(values['KLINIK_REG_D']),str(values['ALAMAT_REG_D']), str(values['PROVINSI_REG_D']), str(values['KOTA_REG_D']), str(values['JAM_BUKA']), str(values['JAM_TUTUP']))
             LAYOUT = event
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
 

@@ -1,4 +1,4 @@
-davin aa,klinik,Jln. Jawa
-asasa,Jawa,asdasdasd
-dada,jawa,dada
-sadasd,asdsda,dasdad
+13520025,Fransiskus Davin,dokter1,Klinik Cisitu
+13520067,Farnas Rozaan,dokter2,Klinik Gresik
+13520069,Kent Liusudarso,dokter3,Klinik BSD
+13520079,Ghebyon Nainggolan,dokter4,Klinik Palembang

@@ -1,7 +1,7 @@
 import csv
 import PySimpleGUI as sg
 from login import load_users
-
+from klinik_terdekat import load_klinik
 sg.theme('LightGreen3')
 
 BTN_SIZE = (40, 2)
@@ -43,41 +43,30 @@ LAYOUT_AFTER_REGISTER_D = [
     [sg.Text('ACCOUNT REGISTERED', font=TITLE_SIZE, size=F_SIZE, justification="center")],
     [sg.Button('Back', key='MAIN_BEFORE_LOGIN', button_color=YELLOW, size=BTN_SIZE)]
 ]
-def auth_register(username,password,role):
-    users = load_users()
+def auth_register(username,role):
+    users = load_users(role)
     for each_user in users:
         if each_user['username'] == username:
-            return 0
-    with open('./src/data/users.txt', 'a', encoding="UTF-8") as user_list:
-        user = csv.writer(user_list, delimiter=',', lineterminator='\n')
-        user.writerow([username, password, role])
-    return 1
+            return False
+    return True
 
-def load_klinik():
-    kliniks = []
-    with open('./src/data/klinik.txt', encoding="UTF-8") as klinik_list:
-        klinik = csv.reader(klinik_list, delimiter=',')
-        for each_klinik in klinik:
-            kliniks.append({'nama_klinik': each_klinik[0], 'alamat': each_klinik[1], 'kota': each_klinik[2], 'provinsi': each_klinik[3], 'jam_buka': each_klinik[4], 'jam_tutup': each_klinik[5]})
-    return kliniks
-
-
-def doc_register(name,klinik,address,provinsi,kota,jam_buka,jam_tutup):
-    kliniks = load_klinik()
-    exist = True
-    print(kliniks)
-    for each_klinik in kliniks:
-        if each_klinik['klinik'] == klinik:
-            exist = False
+def doc_register(username, nama, password, klinik):
     with open('./src/data/Doktor.txt', 'a', encoding="UTF-8") as doc_list:
         docs = csv.writer(doc_list, delimiter=',', lineterminator='\n')
-        docs.writerow([name, klinik, address])
-    if exist:
-        with open('./src/data/Klinik.txt', 'a', encoding="UTF-8") as klk_list:
-            klk = csv.writer(klk_list, delimiter=',', lineterminator='\n')
-            klk.writerow([klinik, address,kota ,provinsi, jam_buka, jam_tutup])
+        docs.writerow([username, nama, password, klinik])
 
-def pas_register(name,address):
+def klinik_register(nama,alamat,kabkota,provinsi,jambuka,jamtutup):
+    kliniks = load_klinik()
+    exist = False
+    for each_klinik in kliniks:
+        if each_klinik['nama_klinik'] == nama:
+            exist = True
+    if not exist:
+        with open('./src/data/klinik.txt', encoding="UTF-8") as klinik_list:
+            klinik = csv.reader(klinik_list, delimiter=',')
+            klinik.writerow([nama,alamat,kabkota,provinsi,jambuka,jamtutup])
+
+def pas_register(username,name,password,address):
     with open('./src/data/Pasien.txt', 'a', encoding="UTF-8") as pas_list:
         pas = csv.writer(pas_list, delimiter=',', lineterminator='\n')
-        pas.writerow([name, address])
+        pas.writerow([username,name,password,address])
