@@ -1,5 +1,5 @@
-import PySimpleGUI as sg
 import csv
+import PySimpleGUI as sg
 
 BORDER_COLOR = '#C7D5E0'
 DARK_HEADER_COLOR = '#1B2838'
@@ -22,13 +22,12 @@ def delete_request(delete):
         for each_request in request:
             if (delete['username'] != each_request[0] or delete['kontak'] != each_request[1] or delete['waktu'] != each_request[2] or delete['klinik'] != each_request[3]):
                 requests.append({"username": each_request[0], "kontak": each_request[1], "waktu": each_request[2], "klinik": each_request[3]})
-    
     with open("./test/jadwal_checkup.txt", "w") as request_list:
         request = csv.writer(request_list, delimiter=",", lineterminator="\n")
         for each_request in requests:
             request.writerow([each_request["username"], each_request["kontak"], each_request["waktu"], each_request["klinik"]])
 
-if (len(get_request()) >= 4):
+if len(get_request()) >= 4:
     LAYOUT_CEK_JADWAL = [
         [sg.Column([[sg.Text('Clinicare', font='Any 20', background_color=DARK_HEADER_COLOR)]], size=(960, 40), pad=(0,0), background_color=DARK_HEADER_COLOR)],
         [sg.Column([[sg.Text('Daftar Request', font='Any 20', pad=((10,0), (0, 0)))]], size=(920, 50), pad=BPAD_TOP)],
@@ -48,7 +47,7 @@ if (len(get_request()) >= 4):
                 pad=BPAD_LEFT, background_color=BORDER_COLOR)],
         [sg.Button('Back', key='MAIN_AFTER_LOGIN_DOKTER')]
     ]
-elif (len(get_request()) == 3):
+elif len(get_request()) == 3:
     LAYOUT_CEK_JADWAL = [
         [sg.Column([[sg.Text('Clinicare', font='Any 20', background_color=DARK_HEADER_COLOR)]], size=(960, 40), pad=(0,0), background_color=DARK_HEADER_COLOR)],
         [sg.Column([[sg.Text('Daftar Request', font='Any 20', pad=((10,0), (0, 0)))]], size=(920, 50), pad=BPAD_TOP)],
@@ -66,7 +65,7 @@ elif (len(get_request()) == 3):
                 pad=BPAD_LEFT, background_color=BORDER_COLOR)],
         [sg.Button('Back', key='MAIN_AFTER_LOGIN_DOKTER')]
     ]
-elif (len(get_request()) == 2):
+elif len(get_request()) == 2:
     LAYOUT_CEK_JADWAL = [
         [sg.Column([[sg.Text('Clinicare', font='Any 20', background_color=DARK_HEADER_COLOR)]], size=(960, 40), pad=(0,0), background_color=DARK_HEADER_COLOR)],
         [sg.Column([[sg.Text('Daftar Request', font='Any 20', pad=((10,0), (0, 0)))]], size=(920, 50), pad=BPAD_TOP)],
@@ -82,7 +81,7 @@ elif (len(get_request()) == 2):
                 pad=BPAD_LEFT, background_color=BORDER_COLOR)],
         [sg.Button('Back', key='MAIN_AFTER_LOGIN_DOKTER')]
     ]
-elif (len(get_request()) == 1):
+elif len(get_request()) == 1:
     LAYOUT_CEK_JADWAL = [
         [sg.Column([[sg.Text('Clinicare', font='Any 20', background_color=DARK_HEADER_COLOR)]], size=(960, 40), pad=(0,0), background_color=DARK_HEADER_COLOR)],
         [sg.Column([[sg.Text('Daftar Request', font='Any 20', pad=((10,0), (0, 0)))]], size=(920, 50), pad=BPAD_TOP)],
@@ -96,7 +95,7 @@ elif (len(get_request()) == 1):
                 pad=BPAD_LEFT, background_color=BORDER_COLOR)],
         [sg.Button('Back', key='MAIN_AFTER_LOGIN_DOKTER')]
     ]
-elif (len(get_request()) == 0):
+elif len(get_request()) == 0:
     LAYOUT_CEK_JADWAL = [
         [sg.Column([[sg.Text('Clinicare', font='Any 20', background_color=DARK_HEADER_COLOR)]], size=(960, 40), pad=(0,0), background_color=DARK_HEADER_COLOR)],
         [sg.Column([[sg.Text('Daftar Request', font='Any 20', pad=((10,0), (0, 0)))]], size=(920, 50), pad=BPAD_TOP)],
