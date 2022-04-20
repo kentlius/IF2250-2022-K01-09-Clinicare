@@ -11,7 +11,8 @@ pip install pysimplegui
 ## Cara Menjalankan Aplikasi
 
 ```sh
-py src/main.py
+cd src
+py main.py
 ```
 
 ## Daftar Modul

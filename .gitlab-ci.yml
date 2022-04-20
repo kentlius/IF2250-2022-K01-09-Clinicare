@@ -15,7 +15,7 @@ pytest:
   stage: Test
   script:
     - pip install -r requirements.txt
-    - cp src/*.py test/;pytest test/*
+    - cp src/*.py test/;rm test/main.py;cd test/;pytest -v
 
 build:
   image: "tobix/pywine:latest"

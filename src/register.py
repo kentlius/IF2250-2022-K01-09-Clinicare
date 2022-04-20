@@ -48,7 +48,7 @@ def auth_register(username,role):
     return True
 
 def doc_register(username, nama, password, klinik):
-    with open('./src/data/dokter.txt', 'a', encoding="UTF-8") as doc_list:
+    with open('../src/data/dokter.txt', 'a', encoding="UTF-8") as doc_list:
         docs = csv.writer(doc_list, delimiter=',', lineterminator='\n')
         docs.writerow([username, nama, password, klinik])
 
@@ -59,11 +59,11 @@ def klinik_register(nama,alamat,kabkota,provinsi,jambuka,jamtutup):
         if each_klinik['nama_klinik'] == nama:
             exist = True
     if not exist:
-        with open('./src/data/klinik.txt', encoding="UTF-8") as klinik_list:
+        with open('../src/data/klinik.txt', encoding="UTF-8") as klinik_list:
             klinik = csv.reader(klinik_list, delimiter=',')
             klinik.writerow([nama,alamat,kabkota,provinsi,jambuka,jamtutup])
 
 def pas_register(username,name,password,address):
-    with open('./src/data/pasien.txt', 'a', encoding="UTF-8") as pas_list:
+    with open('../src/data/pasien.txt', 'a', encoding="UTF-8") as pas_list:
         pas = csv.writer(pas_list, delimiter=',', lineterminator='\n')
         pas.writerow([username,name,password,address])

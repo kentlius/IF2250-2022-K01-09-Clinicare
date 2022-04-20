@@ -8,7 +8,7 @@ BPAD_LEFT = ((20,10), (0, 10))
 
 def get_request():
     requests = []
-    with open("./src/data/jadwal.txt", encoding="utf-8") as request_list:
+    with open("../src/data/jadwal.txt", encoding="utf-8") as request_list:
         request = csv.reader(request_list, delimiter=",")
         for each_request in request:
             requests.append({"dokter": each_request[1], "pasien": each_request[2], "kontak": each_request[5], "waktu": "Tanggal: "+each_request[3]+" Pukul: "+each_request[4], "klinik": each_request[0]})

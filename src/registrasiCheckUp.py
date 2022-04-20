@@ -39,7 +39,7 @@ LAYOUT_PENDAFTARAN = 	[[sg.Column(top_banner, size=(960, 40), pad=(0,0), backgro
 ]
 
 def getPasienFullName(username):
-	with open('./src/data/Pasien.txt', encoding="UTF-8") as Pasien:
+	with open('../src/data/Pasien.txt', encoding="UTF-8") as Pasien:
 		pasienDB = csv.reader(Pasien, delimiter=',')
 		for dataPasien in pasienDB:
 			if dataPasien[0] == username:
@@ -47,7 +47,7 @@ def getPasienFullName(username):
 	return ''
 
 def getKlinik(dokterFullName):
-	with open('./src/data/Dokter.txt', encoding="UTF-8") as Dokter:
+	with open('../src/data/Dokter.txt', encoding="UTF-8") as Dokter:
 		dokterDB = csv.reader(Dokter, delimiter=',')
 		for dataDokter in dokterDB:
 			if dataDokter[1] == dokterFullName:
@@ -56,7 +56,7 @@ def getKlinik(dokterFullName):
 
 def getDokterByKlinik(klinik):
 	listDokter = []
-	with open('./src/data/dokter.txt', encoding="UTF-8") as Dokter:
+	with open('../src/data/dokter.txt', encoding="UTF-8") as Dokter:
 		dokterDB = csv.reader(Dokter, delimiter=',')
 		for dataDokter in dokterDB:
 			if dataDokter[3] == klinik:

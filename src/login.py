@@ -30,7 +30,7 @@ LAYOUT_LOGIN_DOKTER = [
 
 def load_users(role):
     users = []
-    with open('./src/data/'+role+'.txt', encoding="UTF-8") as user_list:
+    with open('../src/data/'+role+'.txt', encoding="UTF-8") as user_list:
         user = csv.reader(user_list, delimiter=',')
         for each_user in user:
             users.append({'username': each_user[0], 'password': each_user[2]})
