@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
 import pandas as pd
 
+
 # Add some color to the window
 theme_dict = {'BACKGROUND': '#2B475D',
                 'TEXT': '#FFFFFF',
