@@ -14,16 +14,16 @@ LAYOUT_LOGIN = [
 
 LAYOUT_LOGIN_PASIEN = [
     [sg.Text('Login Pasien', font=TITLE_SIZE, size=F_SIZE, justification="center")],
-    [sg.Text('Username', size=BTN_SIZE), sg.InputText(key='USERNAME_P',do_not_clear=False)],
-    [sg.Text('Password', size=BTN_SIZE), sg.InputText(key='PASSWORD_P', password_char='*', do_not_clear=False)],
+    [sg.Text('Username', size=BTN_SIZE), sg.InputText(key='USERNAME_P',do_not_clear=True)],
+    [sg.Text('Password', size=BTN_SIZE), sg.InputText(key='PASSWORD_P', password_char='*', do_not_clear=True)],
     [sg.Button('Login', key='MAIN_AFTER_LOGIN_PASIEN', button_color=YELLOW, size=BTN_SIZE)],
     [sg.Button('Back', key='MAIN_BEFORE_LOGIN', button_color=YELLOW, size=BTN_SIZE)]
 ]
 
 LAYOUT_LOGIN_DOKTER = [
     [sg.Text('Login Pasien', font=TITLE_SIZE, size=F_SIZE, justification="center")],
-    [sg.Text('Username', size=BTN_SIZE), sg.InputText(key='USERNAME_D',do_not_clear=False)],
-    [sg.Text('Password', size=BTN_SIZE), sg.InputText(key='PASSWORD_D', password_char='*', do_not_clear=False)],
+    [sg.Text('Username', size=BTN_SIZE), sg.InputText(key='USERNAME_D',do_not_clear=True)],
+    [sg.Text('Password', size=BTN_SIZE), sg.InputText(key='PASSWORD_D', password_char='*', do_not_clear=True)],
     [sg.Button('Login', key='MAIN_AFTER_LOGIN_DOKTER', button_color=YELLOW, size=BTN_SIZE)],
     [sg.Button('Back', key='MAIN_BEFORE_LOGIN', button_color=YELLOW, size=BTN_SIZE)]
 ]
