@@ -1,14 +1,8 @@
 import csv
 import PySimpleGUI as sg
+from style import DARK_HEADER_COLOR, BPAD_TOP, BPAD_LEFT
 
 sg.theme('LightGreen3')
-
-BORDER_COLOR = '#C7D5E0'
-DARK_HEADER_COLOR = '#1B2838'
-BPAD_TOP = ((20,20), (20, 10))
-BPAD_LEFT = ((20,10), (0, 10))
-BPAD_LEFT_INSIDE = (0, 10)
-BPAD_RIGHT = ((10,20), (10, 20))
 
 BANNER = [[sg.Text('Clinicare', font='Any 20', background_color=DARK_HEADER_COLOR)]]
 

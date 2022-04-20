@@ -5,12 +5,10 @@ from login import LAYOUT_LOGIN, LAYOUT_LOGIN_PASIEN, LAYOUT_LOGIN_DOKTER, auth_l
 from register import LAYOUT_REGISTER, LAYOUT_AFTER_REGISTER_P, LAYOUT_AFTER_REGISTER_D, auth_register, doc_register, klinik_register, pas_register
 from klinik_terdekat import LAYOUT_KLINIK, data_klinik
 from registrasiCheckUp import LAYOUT_PENDAFTARAN, getPasienFullName, getKlinik, getDokterByKlinik
+from style import BTN_SIZE, F_SIZE, YELLOW, TITLE_SIZE
+from doktercekjadwal import LAYOUT_CEK_JADWAL, get_request
 sg.theme('LightGreen3')
 
-BTN_SIZE = (40, 2)
-F_SIZE = (40, 2)
-YELLOW = "#DEBE97"
-TITLE_SIZE = "24px"
 
 LAYOUT_MAIN_BEFORE_LOGIN = [
     [sg.Text('Main Menu', font=TITLE_SIZE, size=F_SIZE, justification="center")],
@@ -34,7 +32,7 @@ LAYOUT_MAIN_AFTER_KONFIRMASI = [
 
 LAYOUT_MAIN_AFTER_LOGIN_DOKTER = [
     [sg.Text('Main Menu Dokter', font=TITLE_SIZE, size=F_SIZE, justification="center")],
-    [sg.Button('Cek Request', size=BTN_SIZE)],
+    [sg.Button('Cek Jadwal', key='CEK_JADWAL', size=BTN_SIZE)],
     [sg.Text('')],
     [sg.Button('Logout', key='LAYOUT_MAIN_BEFORE_LOGIN'), sg.Button('Exit')]
 ]
@@ -53,6 +51,8 @@ LAYOUT = [
         sg.Column(LAYOUT_MAIN_AFTER_KONFIRMASI, visible=False, key='LAYOUT_MAIN_AFTER_KONFIRMASI', element_justification='c'),
         sg.Column(LAYOUT_KLINIK, visible=False, key='LAYOUT_KLINIK'),
         sg.Column(LAYOUT_PENDAFTARAN, visible=False, key='LAYOUT_PENDAFTARAN')
+        sg.Column(LAYOUT_KLINIK, visible=False, key='LAYOUT_KLINIK'),
+        sg.Column(LAYOUT_CEK_JADWAL, visible=False, key='LAYOUT_CEK_JADWAL')
     ]
 ]
 
@@ -175,6 +175,13 @@ while True:
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = event
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
+    elif event == 'CEK_JADWAL':
+        window[f'LAYOUT_{LAYOUT}'].update(visible=False)
+        LAYOUT = 'CEK_JADWAL'         
+        window[f'LAYOUT_{LAYOUT}'].update(visible=True)
+        for i in range(len(get_request())):
+            if UNAME != get_request()[i]["dokter"]:
+                window['JADWAL'+str(i)].update(visible=True)
 
     
     if event == 'Cari':
