@@ -71,7 +71,7 @@ while True:
         LAYOUT = event
         ROLE = 'Dokter'
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
- 
+
     elif 'MAIN_AFTER_LOGIN' in event:
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         if ROLE=='Pasien':
