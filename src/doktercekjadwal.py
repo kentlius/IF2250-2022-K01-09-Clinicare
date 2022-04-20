@@ -11,7 +11,7 @@ def get_request():
     with open("./src/data/jadwal.txt", encoding="utf-8") as request_list:
         request = csv.reader(request_list, delimiter=",")
         for each_request in request:
-            requests.append({"username": each_request[2], "kontak": each_request[5], "waktu": "Tanggal: "+each_request[3]+" Pukul: "+each_request[4], "klinik": each_request[0]})
+            requests.append({"dokter": each_request[1], "pasien": each_request[2], "kontak": each_request[5], "waktu": "Tanggal: "+each_request[3]+" Pukul: "+each_request[4], "klinik": each_request[0]})
     return requests
 
 LAYOUT_CEK_JADWAL = [

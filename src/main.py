@@ -78,7 +78,8 @@ while True:
         LAYOUT = 'CEK_JADWAL'         
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
         for i in range(len(get_request())):
-            window['JADWAL'+str(i)].update(visible=True)
+            if UNAME != get_request()[i]["dokter"]:
+                window['JADWAL'+str(i)].update(visible=True)
 
     if event == 'Cari':
         for i in range(len(klinik)):
