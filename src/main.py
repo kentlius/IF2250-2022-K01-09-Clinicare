@@ -48,7 +48,8 @@ LAYOUT = [
 window = sg.Window('Clinicare', LAYOUT)
 
 LAYOUT = 'MAIN_BEFORE_LOGIN'
-
+init = get_request()
+n_request = len(get_request())
 while True:
     event, values = window.read()
     print(event, values)
@@ -77,22 +78,18 @@ while True:
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = 'CEK_JADWAL'         
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
+        for i in range(len(get_request())):
+            window['REQUEST'+str(i)].update(visible=True)
+    
+    elif event in ["MAIN_CONFIRM"+str(i) for i in range(n_request)]:
+        window['REQUEST'+event[-1]].update(visible=False)
+        delete_request(init[int(event[-1])])
+        sg.popup_auto_close("Request diterima!")
 
-    elif 'MAIN_CONFIRM' in event:
-        window[f'LAYOUT_{LAYOUT}'].update(visible=False)
-        delete_request(get_request()[0])
-        # TODO: handle layout when accept request 
-        sg.popup_auto_close("Request diterima!")    
-        LAYOUT = 'CEK_JADWAL'
-        window[f'LAYOUT_{LAYOUT}'].update(visible=True)
-
-    elif 'MAIN_REJECT' in event:
-        window[f'LAYOUT_{LAYOUT}'].update(visible=False)
-        delete_request(get_request()[0])
-        # TODO: handle layout when reject request     
-        sg.popup_auto_close("Request ditolak!")    
-        LAYOUT = 'CEK_JADWAL'
-        window[f'LAYOUT_{LAYOUT}'].update(visible=True)
+    elif event in ["MAIN_REJECT"+str(i) for i in range(n_request)]:
+        window['REQUEST'+event[-1]].update(visible=False)
+        delete_request(init[int(event[-1])])
+        sg.popup_auto_close("Request ditolak!")
 
     if event == 'Cari':
         for i in range(len(klinik)):
