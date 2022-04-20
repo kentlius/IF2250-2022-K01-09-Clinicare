@@ -1,2 +1,2 @@
-Klinik Cisitu,Fransiskus Davin,ucup,2022-1-1,15.00
-Klinik Gresik,Farnas Rozaan,otong,2022-1-1,15.00
+Klinik Cisitu,Fransiskus Davin,ucup,2022-1-1,15.00,083851005206
+Klinik Gresik,Farnas Rozaan,otong,2022-1-1,15.00,083851005207

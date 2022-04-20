@@ -4,6 +4,7 @@ from login import LAYOUT_LOGIN, LAYOUT_LOGIN_PASIEN, LAYOUT_LOGIN_DOKTER, auth_l
 from register import LAYOUT_REGISTER, LAYOUT_AFTER_REGISTER_P, LAYOUT_AFTER_REGISTER_D, auth_register, doc_register, klinik_register, pas_register
 from klinik_terdekat import LAYOUT_KLINIK, data_klinik
 from style import BTN_SIZE, F_SIZE, YELLOW, TITLE_SIZE
+from doktercekjadwal import LAYOUT_CEK_JADWAL, get_request
 
 sg.theme('LightGreen3')
 
@@ -40,7 +41,8 @@ LAYOUT = [
         sg.Column(LAYOUT_AFTER_REGISTER_D, visible=False, key='LAYOUT_AFTER_REGISTER_D', element_justification='c'),
         sg.Column(LAYOUT_MAIN_AFTER_LOGIN_DOKTER, visible=False, key='LAYOUT_MAIN_AFTER_LOGIN_DOKTER', element_justification='c'),
         sg.Column(LAYOUT_MAIN_AFTER_LOGIN_PASIEN, visible=False, key='LAYOUT_MAIN_AFTER_LOGIN_PASIEN', element_justification='c'),
-        sg.Column(LAYOUT_KLINIK, visible=False, key='LAYOUT_KLINIK')
+        sg.Column(LAYOUT_KLINIK, visible=False, key='LAYOUT_KLINIK'),
+        sg.Column(LAYOUT_CEK_JADWAL, visible=False, key='LAYOUT_CEK_JADWAL')
     ]
 ]
 
@@ -49,6 +51,7 @@ window = sg.Window('Clinicare', LAYOUT)
 LAYOUT = 'MAIN_BEFORE_LOGIN'
 
 ROLE = ""
+UNAME = ""
 while True:
     event, values = window.read()
     print(event, values, ROLE)
@@ -118,6 +121,14 @@ while True:
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = 'MAIN_BEFORE_LOGIN'
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
+
+    elif event in ('CEK_JADWAL'):
+        window[f'LAYOUT_{LAYOUT}'].update(visible=False)
+        LAYOUT = 'CEK_JADWAL'         
+        window[f'LAYOUT_{LAYOUT}'].update(visible=True)
+        for i in range(len(get_request())):
+            if UNAME == get_request()[i]["dokter"]:
+                window['JADWAL'+str(i)].update(visible=True)
 
     if event == 'Cari':
         for i in range(len(data_klinik)):
