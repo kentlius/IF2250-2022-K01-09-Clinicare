@@ -3,13 +3,10 @@ import PySimpleGUI as sg
 from login import LAYOUT_LOGIN, LAYOUT_LOGIN_PASIEN, LAYOUT_LOGIN_DOKTER, auth_login
 from register import LAYOUT_REGISTER, LAYOUT_AFTER_REGISTER_P, LAYOUT_AFTER_REGISTER_D, auth_register, doc_register, klinik_register, pas_register
 from klinik_terdekat import LAYOUT_KLINIK, data_klinik
+from style import *
 
 sg.theme('LightGreen3')
 
-BTN_SIZE = (40, 2)
-F_SIZE = (40, 2)
-YELLOW = "#DEBE97"
-TITLE_SIZE = "24px"
 
 LAYOUT_MAIN_BEFORE_LOGIN = [
     [sg.Text('Main Menu', font=TITLE_SIZE, size=F_SIZE, justification="center")],

@@ -2,12 +2,9 @@ import csv
 import PySimpleGUI as sg
 from login import load_users
 from klinik_terdekat import load_klinik
-sg.theme('LightGreen3')
+from style import *
 
-BTN_SIZE = (40, 2)
-F_SIZE = (40, 2)
-YELLOW = "#DEBE97"
-TITLE_SIZE = "24px"
+sg.theme('LightGreen3')
 
 Pasien_layout =   [[sg.Text('PASIEN', background_color='darkseagreen', justification="center")],
                 [sg.Text('Username', size=BTN_SIZE, background_color='darkseagreen'), sg.InputText(key='USERNAME_REG_P',do_not_clear=False)],

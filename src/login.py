@@ -1,13 +1,9 @@
 
 import csv
 import PySimpleGUI as sg
+from style import *
 
 sg.theme('LightGreen3')
-
-BTN_SIZE = (40, 2)
-F_SIZE = (40, 2)
-YELLOW = "#DEBE97"
-TITLE_SIZE = "24px"
 
 LAYOUT_LOGIN = [
     [sg.Text('Login', font=TITLE_SIZE, size=F_SIZE, justification="center")],
