@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 
-from login import LAYOUT_LOGIN, LAYOUT_LOGIN_PASIEN, LAYOUT_LOGIN_DOKTER, auth_login
+from login import LAYOUT_LOGIN, LAYOUT_LOGIN_PASIEN, LAYOUT_LOGIN_DOKTER, auth_login, get_name
 from register import LAYOUT_REGISTER, LAYOUT_AFTER_REGISTER_P, LAYOUT_AFTER_REGISTER_D, auth_register, doc_register, klinik_register, pas_register
 from klinik_terdekat import LAYOUT_KLINIK, data_klinik
 from style import BTN_SIZE, F_SIZE, YELLOW, TITLE_SIZE
@@ -25,7 +25,7 @@ LAYOUT_MAIN_AFTER_LOGIN_PASIEN = [
 
 LAYOUT_MAIN_AFTER_LOGIN_DOKTER = [
     [sg.Text('Main Menu Dokter', font=TITLE_SIZE, size=F_SIZE, justification="center")],
-    [sg.Button('Cek Request', size=BTN_SIZE)],
+    [sg.Button('Cek Request', key='CEK_JADWAL', size=BTN_SIZE)],
     [sg.Text('')],
     [sg.Button('Logout', key='LAYOUT_MAIN_BEFORE_LOGIN'), sg.Button('Exit')]
 ]
@@ -51,7 +51,7 @@ window = sg.Window('Clinicare', LAYOUT)
 LAYOUT = 'MAIN_BEFORE_LOGIN'
 
 ROLE = ""
-UNAME = ""
+NAME = ""
 while True:
     event, values = window.read()
     print(event, values, ROLE)
@@ -77,9 +77,11 @@ while True:
         if ROLE=='Pasien':
             UNAME = str(values['USERNAME_P'])
             PW = str(values['PASSWORD_P'])
+            NAME = get_name(UNAME,ROLE)
         else :
             UNAME = str(values['USERNAME_D'])
             PW = str(values['PASSWORD_D'])
+            NAME = get_name(UNAME,ROLE)
         if not UNAME:
             sg.Popup('Username tidak boleh kosong')
         elif not PW:
@@ -127,7 +129,7 @@ while True:
         LAYOUT = 'CEK_JADWAL'         
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
         for i in range(len(get_request())):
-            if UNAME == get_request()[i]["dokter"]:
+            if NAME==get_request()[i]['dokter']:
                 window['JADWAL'+str(i)].update(visible=True)
 
     if event == 'Cari':

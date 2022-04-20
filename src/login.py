@@ -33,7 +33,7 @@ def load_users(role):
     with open('./src/data/'+role+'.txt', encoding="UTF-8") as user_list:
         user = csv.reader(user_list, delimiter=',')
         for each_user in user:
-            users.append({'username': each_user[0], 'password': each_user[2]})
+            users.append({'username': each_user[0], 'name': each_user[1], 'password': each_user[2]})
     return users
 
 def auth_login(username,password,role):
@@ -42,3 +42,9 @@ def auth_login(username,password,role):
         if each_user['username'] == username and each_user['password'] == password:
             return 0
     return 1
+
+def get_name(username,role):
+    users = load_users(role)
+    for each_user in users:
+        if username==each_user['username']:
+            return each_user['name']
