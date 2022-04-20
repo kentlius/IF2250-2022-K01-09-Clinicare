@@ -6,7 +6,7 @@ from klinik_terdekat import LAYOUT_KLINIK, data_klinik
 from style import BTN_SIZE, F_SIZE, YELLOW, TITLE_SIZE
 from doktercekjadwal import LAYOUT_CEK_JADWAL, get_request
 
-sg.theme('LightGreen3')
+# sg.theme('LightGreen3')
 
 
 LAYOUT_MAIN_BEFORE_LOGIN = [
@@ -25,7 +25,7 @@ LAYOUT_MAIN_AFTER_LOGIN_PASIEN = [
 
 LAYOUT_MAIN_AFTER_LOGIN_DOKTER = [
     [sg.Text('Main Menu Dokter', font=TITLE_SIZE, size=F_SIZE, justification="center")],
-    [sg.Button('Cek Request', size=BTN_SIZE)],
+    [sg.Button('Cek Jadwal', key='CEK_JADWAL', size=BTN_SIZE)],
     [sg.Text('')],
     [sg.Button('Logout', key='LAYOUT_MAIN_BEFORE_LOGIN'), sg.Button('Exit')]
 ]
@@ -51,7 +51,6 @@ window = sg.Window('Clinicare', LAYOUT)
 LAYOUT = 'MAIN_BEFORE_LOGIN'
 
 ROLE = ""
-UNAME = ""
 while True:
     event, values = window.read()
     print(event, values, ROLE)
@@ -121,13 +120,13 @@ while True:
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = 'MAIN_BEFORE_LOGIN'
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
-
-    elif event in ('CEK_JADWAL'):
+    
+    elif event == 'CEK_JADWAL':
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = 'CEK_JADWAL'         
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
         for i in range(len(get_request())):
-            if UNAME == get_request()[i]["dokter"]:
+            if UNAME != get_request()[i]["dokter"]:
                 window['JADWAL'+str(i)].update(visible=True)
 
     if event == 'Cari':
