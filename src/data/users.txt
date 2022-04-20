@@ -1,0 +1,7 @@
+pasien,123,Pasien
+doktor,123,Dokter
+tes,123,Pasien
+doktorr,haha,Dokter
+dasd,dasdad,Dokter
+doktor tes,asdafad,Dokter
+res,dasd,Pasien
