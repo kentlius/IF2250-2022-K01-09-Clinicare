@@ -1,7 +1,8 @@
 import PySimpleGUI as sg
+
 from login import LAYOUT_LOGIN, LAYOUT_LOGIN_PASIEN, LAYOUT_LOGIN_DOKTER, auth_login
 from register import LAYOUT_REGISTER, LAYOUT_AFTER_REGISTER_P, LAYOUT_AFTER_REGISTER_D, auth_register, doc_register, pas_register
-from klinik_terdekat import LAYOUT_KLINIK
+from klinik_terdekat import LAYOUT_KLINIK, klinik
 
 sg.theme('LightGreen3')
 
@@ -125,6 +126,13 @@ while True:
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = 'MAIN_BEFORE_LOGIN'
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
+
+    if event == 'Cari':
+        for i in range(len(klinik)):
+            if values[0].lower() == klinik[i]['provinsi'].lower() and values[1].lower() == klinik[i]['kota'].lower():
+                window[str(i)].update(visible=True)
+            else:
+                window[str(i)].update(visible=False)
 
     if event == sg.WIN_CLOSED or 'Exit' in event:
         break
