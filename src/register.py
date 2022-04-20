@@ -76,7 +76,7 @@ def doc_register(name,klinik,address,provinsi,kota,jam_buka,jam_tutup):
     if exist:
         with open('./src/data/Klinik.txt', 'a') as Klk_list:
             klk = csv.writer(Klk_list, delimiter=',', lineterminator='\n')
-            klk.writerow([klinik, address, provinsi, kota, jam_buka, jam_tutup])
+            klk.writerow([klinik, address,kota ,provinsi, jam_buka, jam_tutup])
 
 def pas_register(name,address):
     with open('./src/data/Pasien.txt', 'a') as pas_list:
