@@ -8,21 +8,27 @@ stages:
 pylint:
   stage: Static Analysis
   script:
-    - pip install pylint
+    - pip install -r requirements.txt
     - pylint -d C0301,C0116,C0114 src/*.py
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 pytest:
   stage: Test
   script:
-    - pip install pytest
-    - cd test/;pytest -v
+    - pip install -r requirements.txt
+    - cp src/*.py test/;cd test/;pytest -v
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 build:
   image: "tobix/pywine:latest"
   stage: Build
   script:
     - cd src/
-    - wine pyinstaller -F main.py
+    - wine pyinstaller -F -n Clinicare main.py
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   artifacts:
     paths:
       - src/dist/*.exe
