@@ -1,5 +1,5 @@
-import PySimpleGUI as sg
 import csv
+import PySimpleGUI as sg
 
 # Add some color to the window
 theme_dict = {'BACKGROUND': '#2B475D',
@@ -38,8 +38,6 @@ LAYOUT_PENDAFTARAN = 	[[sg.Column(top_banner, size=(960, 40), pad=(0,0), backgro
 						 [sg.Button('Back', key="BACKTOLIHAT"), sg.Button('Konfirmasi', key='KONFIRMASI')]
 ]
 
-#def loadRegistrasiCheckUpLayout(nama_klinik,alamat_klinik,provinsi_klinik,kota_klinik,jam_buka,jam_tutup)
-
 def getPasienFullName(username):
 	with open('./src/data/Pasien.txt', encoding="UTF-8") as Pasien:
 		pasienDB = csv.reader(Pasien, delimiter=',')
@@ -64,4 +62,3 @@ def getDokterByKlinik(klinik):
 			if dataDokter[3] == klinik:
 				listDokter.append(dataDokter[1])
 	return listDokter
-	

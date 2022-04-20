@@ -1,5 +1,4 @@
 import PySimpleGUI as sg
-from matplotlib.pyplot import text
 
 from login import LAYOUT_LOGIN, LAYOUT_LOGIN_PASIEN, LAYOUT_LOGIN_DOKTER, auth_login
 from register import LAYOUT_REGISTER, LAYOUT_AFTER_REGISTER_P, LAYOUT_AFTER_REGISTER_D, auth_register, doc_register, klinik_register, pas_register
@@ -130,7 +129,7 @@ while True:
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = 'MAIN_BEFORE_LOGIN'
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
-    
+
     if event == 'BACKTOLIHAT':
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = 'KLINIK'
