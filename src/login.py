@@ -1,7 +1,7 @@
 
 import csv
 import PySimpleGUI as sg
-from style import *
+from style import BTN_SIZE, F_SIZE, YELLOW, TITLE_SIZE
 
 sg.theme('LightGreen3')
 

@@ -2,7 +2,7 @@ import csv
 import PySimpleGUI as sg
 from login import load_users
 from klinik_terdekat import load_klinik
-from style import *
+from style import BTN_SIZE, F_SIZE, YELLOW, TITLE_SIZE
 
 sg.theme('LightGreen3')
 
