@@ -1,2 +1,6 @@
-Klinik Cisitu,Fransiskus Davin,ucup,2022-1-1,15.00
-Klinik Gresik,Farnas Rozaan,otong,2022-1-1,15.00
+Klinik Cisitu,Fransiskus Davin,Ucup Surucup,2022-1-1,15.00,ig:ucup00
+Klinik Gresik,Farnas Rozaan,Otong Surotong,2022-1-1,15.00,wa:0880
+Klinik Cisitu,Fransiskus Davin,Ucup Surucup,2022-04-23,15:11,0888888888
+Klinik Cisitu,Fransiskus Davin,Ucup Surucup,2022-04-23,0:0,0000000
+Klinik Cisitu,Fransiskus Davin,Ucup Surucup,2022-04-23,0:0,00000000000
+Klinik Cisitu,Fransiskus Davin,Ucup Surucup,2022-04-15,0:0,----------

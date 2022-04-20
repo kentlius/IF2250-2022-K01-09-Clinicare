@@ -38,7 +38,7 @@ data_klinik = load_klinik()
 for i in range(len(data_klinik)):
     LAYOUT_KLINIK.append(
         [   sg.Column([
-            [sg.Text(data_klinik[i]['nama_klinik'], font='Any 20')],
+            [sg.Text(data_klinik[i]['nama_klinik'], font='Any 20', key='NAMAKLINIK')],
             [sg.Text(data_klinik[i]['alamat'] + ', ' + data_klinik[i]['kota'] + ', ' + data_klinik[i]['provinsi']), sg.Text(data_klinik[i]['jam_buka'] + ' - ' + data_klinik[i]['jam_tutup'])],
-            [sg.Button('Daftar')]], size=(920, 100), pad=BPAD_LEFT, visible=False, key=str(i))
+            [sg.Button('Daftar', key=f'daftar_{i}')]], size=(920, 100), pad=BPAD_LEFT, visible=False, key=str(i))
         ])
