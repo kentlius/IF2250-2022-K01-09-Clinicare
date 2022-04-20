@@ -23,8 +23,9 @@ LAYOUT_MAIN_AFTER_LOGIN_PASIEN = [
     [sg.Text('')],
     [sg.Button('Logout', key='LAYOUT_MAIN_BEFORE_LOGIN'), sg.Button('Exit')]
 ]
+
 LAYOUT_MAIN_AFTER_KONFIRMASI = [
-    [sg.Text('Main Menu Pasien', font=TITLE_SIZE, size=F_SIZE, justification="center")],
+    [sg.Text('Main Menu Pasien after', font=TITLE_SIZE, size=F_SIZE, justification="center")],
     [sg.Button('Daftar Check Up', key='KLINIK', size=BTN_SIZE)],
     [sg.Text('')],
     [sg.Button('Logout', key='LAYOUT_MAIN_BEFORE_LOGIN'), sg.Button('Exit')]
@@ -50,8 +51,7 @@ LAYOUT = [
         sg.Column(LAYOUT_MAIN_AFTER_LOGIN_PASIEN, visible=False, key='LAYOUT_MAIN_AFTER_LOGIN_PASIEN', element_justification='c'),
         sg.Column(LAYOUT_MAIN_AFTER_KONFIRMASI, visible=False, key='LAYOUT_MAIN_AFTER_KONFIRMASI', element_justification='c'),
         sg.Column(LAYOUT_KLINIK, visible=False, key='LAYOUT_KLINIK'),
-        sg.Column(LAYOUT_PENDAFTARAN, visible=False, key='LAYOUT_PENDAFTARAN')
-        sg.Column(LAYOUT_KLINIK, visible=False, key='LAYOUT_KLINIK'),
+        sg.Column(LAYOUT_PENDAFTARAN, visible=False, key='LAYOUT_PENDAFTARAN'),
         sg.Column(LAYOUT_CEK_JADWAL, visible=False, key='LAYOUT_CEK_JADWAL')
     ]
 ]
@@ -64,7 +64,7 @@ ROLE = ""
 while True:
     event, values = window.read()
     print(event, values, ROLE)
-    if event in ('LOGIN', 'REGISTER', 'KLINIK'):
+    if event in ('LOGIN', 'REGISTER', 'KLINIK', 'KLINIK_2'):
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
         LAYOUT = event
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
@@ -169,7 +169,7 @@ while True:
         sg.Popup('Pendaftaran Berhasil dilakukan')
         window[f'LAYOUT_PENDAFTARAN'].update(visible=False)
         LAYOUT = 'PENDAFTARAN'
-        window[f'LAYOUT_MAIN_AFTER_KONFIRMASI'].update(visible=True)
+        window[f'LAYOUT_MAIN_AFTER_LOGIN_Pasien'].update(visible=True)
     
     if event == "MAIN_AFTER_KONFIRMASI":
         window[f'LAYOUT_{LAYOUT}'].update(visible=False)
