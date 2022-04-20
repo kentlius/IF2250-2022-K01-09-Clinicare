@@ -1,5 +1,5 @@
-import PySimpleGUI as sg
 import csv
+import PySimpleGUI as sg
 
 sg.theme('LightGreen3')
 
@@ -28,17 +28,17 @@ LAYOUT_KLINIK = [
 
 def load_klinik():
     kliniks = []
-    with open('./src/data/klinik.txt') as klinik_list:
+    with open('./src/data/klinik.txt', encoding="UTF-8") as klinik_list:
         klinik = csv.reader(klinik_list, delimiter=',')
         for each_klinik in klinik:
             kliniks.append({'nama_klinik': each_klinik[0], 'alamat': each_klinik[1], 'kota': each_klinik[2], 'provinsi': each_klinik[3], 'jam_buka': each_klinik[4], 'jam_tutup': each_klinik[5]})
     return kliniks
 
-klinik = load_klinik()
-for i in range(len(klinik)):
+data_klinik = load_klinik()
+for i in range(len(data_klinik)):
     LAYOUT_KLINIK.append(
         [   sg.Column([
-            [sg.Text(klinik[i]['nama_klinik'], font='Any 20')],
-            [sg.Text(klinik[i]['alamat'] + ', ' + klinik[i]['kota'] + ', ' + klinik[i]['provinsi']), sg.Text(klinik[i]['jam_buka'] + ' - ' + klinik[i]['jam_tutup'])],
+            [sg.Text(data_klinik[i]['nama_klinik'], font='Any 20')],
+            [sg.Text(data_klinik[i]['alamat'] + ', ' + data_klinik[i]['kota'] + ', ' + data_klinik[i]['provinsi']), sg.Text(data_klinik[i]['jam_buka'] + ' - ' + data_klinik[i]['jam_tutup'])],
             [sg.Button('Daftar')]], size=(920, 100), pad=BPAD_LEFT, visible=False, key=str(i))
         ])

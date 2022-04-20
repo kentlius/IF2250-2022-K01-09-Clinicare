@@ -1,5 +1,6 @@
-import PySimpleGUI as sg
+
 import csv
+import PySimpleGUI as sg
 
 sg.theme('LightGreen3')
 
@@ -33,12 +34,12 @@ LAYOUT_LOGIN_DOKTER = [
 
 def load_users():
     users = []
-    with open('./src/data/users.txt') as user_list:
+    with open('./src/data/users.txt', encoding="UTF-8") as user_list:
         user = csv.reader(user_list, delimiter=',')
         for each_user in user:
             users.append({'username': each_user[0], 'password': each_user[1], 'role': each_user[2]})
     return users
-    
+
 def auth_login(username,password,role):
     users = load_users()
     for each_user in users:
