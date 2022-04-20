@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 from login import LAYOUT_LOGIN, LAYOUT_LOGIN_PASIEN, LAYOUT_LOGIN_DOKTER, auth_login
-from register import LAYOUT_REGISTER, LAYOUT_AFTER_REGISTER_P, LAYOUT_AFTER_REGISTER_D, auth_register
+from register import LAYOUT_REGISTER, LAYOUT_AFTER_REGISTER_P, LAYOUT_AFTER_REGISTER_D, auth_register, doc_register, pas_register
 from klinik_terdekat import LAYOUT_KLINIK
 
 sg.theme('LightGreen3')
@@ -102,6 +102,7 @@ while True:
         elif auth_register(uname, pw, 'Pasien')==0:
             sg.Popup('Username sudah dipakai')
         else:
+            pas_register(str(values["NAME_REG_P"]),str(values["ALAMAT_REG_P"]))
             LAYOUT = event
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
         
@@ -116,6 +117,7 @@ while True:
         elif auth_register(uname, pw, 'Dokter')==0:
             sg.Popup('Username sudah dipakai')
         else:
+            doc_register(str(values['NAME_REG_D']), str(values['KLINIK_REG_D']), str(values['ALAMAT_REG_D']), str(values['PROVINSI_REG_D']), str(values['KOTA_REG_D']), str(values['JAM_BUKA']), str(values['JAM_TUTUP']))
             LAYOUT = event
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
         
