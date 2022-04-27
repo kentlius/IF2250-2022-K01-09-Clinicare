@@ -104,10 +104,10 @@ while True:
         PW = str(values['PASSWORD_REG_P'])
         if (not UNAME or not PW):
             sg.Popup('Username atau password tidak boleh kosong')
-        elif auth_register(UNAME,'Pasien'):
+        elif auth_register(UNAME,'pasien'):
             sg.Popup('Username sudah dipakai')
         else:
-            pas_register(UNAME, str(values['NAMA_REG_P']), PW, str(values['ALAMAT_REG_P']))
+            pas_register(UNAME, str(values['NAME_REG_P']), PW, str(values['ALAMAT_REG_P']))
             LAYOUT = event
         window[f'LAYOUT_{LAYOUT}'].update(visible=True)
 
@@ -117,7 +117,7 @@ while True:
         PW = str(values['PASSWORD_REG_D'])
         if not UNAME or not PW:
             sg.Popup('Username atau password tidak boleh kosong')
-        elif auth_register(UNAME,'Doktor'):
+        elif auth_register(UNAME,'dokter'):
             sg.Popup('Username sudah dipakai')
         else:
             doc_register(UNAME,str(values['NAME_REG_D']), PW, str(values['KLINIK_REG_D']))

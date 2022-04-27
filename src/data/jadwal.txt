@@ -2,3 +2,5 @@ Klinik Cisitu,Fransiskus Davin,Ucup Surucup,2022-1-1,15.00,ig:ucup00
 Klinik Cisitu,Fransiskus Davin,ucup,2022-1-1,15.00,083851005206
 Klinik Gresik,Farnas Rozaan,otong,2022-1-1,15.00,083851005207
 Klinik Cisitu,Fransiskus Davin,Ucup Surucup,2022-04-29,0:0,asd
+Klinik Cisitu,Fransiskus Davin,kent Liu,2022-04-22,12:10,
+,,kent Liu,2022-04-22,12:10,
